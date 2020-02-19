@@ -9,21 +9,20 @@ ENV JDBC_MSSQL_VERSION 7.4.1.jre11
 ENV LAUNCH_JBOSS_IN_BACKGROUND 1
 ENV PROXY_ADDRESS_FORWARDING false
 ENV JBOSS_HOME /opt/jboss/keycloak
-ENV KEYCLOAK_IMPORT_REALM ${KEYCLOAK_IMPORT_REALM:-realm-export.json}
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+#ENV KEYCLOAK_IMPORT_REALM ${KEYCLOAK_IMPORT_REALM:-realm-export.json}
+ENV KEYCLOAK_IMPORT /opt/jboss/keycloak/realm-export.json
 ARG KEYCLOAK_ADMIN_USER=admin
 ARG KEYCLOAK_ADMIN_PASS=admin
-ARG KEYCLOAK_IMPORT_REALM
+#ARG KEYCLOAK_IMPORT_REALM
 
 USER root
-
-RUN pwd
 
 RUN apt-get update && apt-get install -y net-tools sudo iproute git software-properties-common nano wget curl gzip hostname openssl tar
 
 RUN mkdir /opt/jboss/ && cd /opt/jboss/ && curl -L https://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz | tar zx && mv /opt/jboss/keycloak-$KEYCLOAK_VERSION /opt/jboss/keycloak
 
 #ADD tools /opt/jboss/tools
-RUN pwd
 COPY createuser.sh /opt/jboss/keycloak
 COPY realm-export.json /opt/jboss/keycloak
 COPY keycloak-admin-cli-8.0.1.jar /opt/jboss/keycloak
@@ -41,12 +40,12 @@ EXPOSE 8080
 EXPOSE 8443
 
 ENTRYPOINT [ "/opt/jboss/keycloak/docker-entrypoint.sh" ]
+#RUN sh /opt/jboss/keycloak/createuser.sh
 
-CMD ["-b", "0.0.0.0"]
-#CMD ["-b", "0.0.0.0", "-Dkeycloak.import=/opt/jboss/keycloak/${KEYCLOAK_IMPORT_REALM}"]
+#CMD ["-b", "0.0.0.0"]
+CMD ["-b", "0.0.0.0", "-Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"]
 #CMD ["-b", "0.0.0.0", "-Dkeycloak.profile.feature.docker=enabled"]
 #CMD ["-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-Dkeycloak.profile.feature.docker=enabled -Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"]
-
 #CMD ["/sbin/my_init", "/bin/bash"]
 
 #-Dkeycloak.migration.action=import
