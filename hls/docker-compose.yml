@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  hlsserver:
+    image: barais/hlsserver
+    environment:
+      KEYCLOAKIPRESOLVE: localhost
+    ports:
+      - 3000:3000
