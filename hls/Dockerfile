@@ -1,6 +1,7 @@
-FROM ubuntu:xenial
+FROM picoded/ubuntu-openjdk-8-jdk
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl sudo net-tools iputils-ping apt-utils software-properties-common git wget build-essential lsb-release
+RUN apt-get update && apt-get install -y --no-install-recommends curl sudo net-tools iputils-ping apt-utils software-properties-common git wget build-essential iproute nano gzip hostname openssl tar telnet lsb-release network-manager
+
 RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 RUN apt-get update && apt-get install -y nodejs 
 
@@ -22,5 +23,8 @@ COPY app.sh ./
 
 EXPOSE 3000
 
-CMD [ "sh", "./app.sh"]
+CMD ["/bin/bash"]
+#CMD [ "sh", "./app.sh"]
+
+#hls ga punya /etc/init.d/networking
 

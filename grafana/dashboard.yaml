@@ -1,0 +1,13 @@
+# # config file version
+apiVersion: 1
+
+providers:
+ - name: prometheus
+   orgId: 1
+   #folder: ''
+   #folderUid: ''
+   type: file
+   editable: true
+   updateIntervalSeconds: 10
+   options:
+     path: /usr/src/grafana/conf/provisioning/dashboards/

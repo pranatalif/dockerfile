@@ -39,11 +39,11 @@ RUN cd $JBOSS_HOME/bin && ./add-user-keycloak.sh -r master -u ${KEYCLOAK_ADMIN_U
 EXPOSE 8080
 EXPOSE 8443
 
-ENTRYPOINT [ "/opt/jboss/keycloak/docker-entrypoint.sh" ]
-#RUN sh /opt/jboss/keycloak/createuser.sh
+CMD ["/bin/bash"]
+#ENTRYPOINT [ "/opt/jboss/keycloak/docker-entrypoint.sh" ]
+#CMD ["-b", "0.0.0.0", "-Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"]
 
 #CMD ["-b", "0.0.0.0"]
-CMD ["-b", "0.0.0.0", "-Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"]
 #CMD ["-b", "0.0.0.0", "-Dkeycloak.profile.feature.docker=enabled"]
 #CMD ["-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-Dkeycloak.profile.feature.docker=enabled -Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"]
 #CMD ["/sbin/my_init", "/bin/bash"]
