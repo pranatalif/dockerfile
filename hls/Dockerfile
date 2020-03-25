@@ -1,4 +1,8 @@
 FROM picoded/ubuntu-openjdk-8-jdk
+# use this if deployed in local machine
+#FROM picoded/ubuntu-openjdk-8-jdk # use this if deployed in gns3
+
+ENV VIRTUAL_HOST hls.gns3.fr
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl sudo net-tools iputils-ping apt-utils software-properties-common git wget build-essential iproute nano gzip hostname openssl tar telnet lsb-release network-manager
 
@@ -24,7 +28,7 @@ COPY app.sh ./
 EXPOSE 3000
 
 CMD ["/bin/bash"]
-#CMD [ "sh", "./app.sh"]
+#CMD [ "sh", "/usr/src/app/app.sh"]
 
-#hls ga punya /etc/init.d/networking
+# hls ga punya /etc/init.d/networking
 

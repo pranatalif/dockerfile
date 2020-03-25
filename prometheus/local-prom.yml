@@ -37,3 +37,10 @@ scrape_configs:
       scrape_interval:  5s
       static_configs:
         - targets:      ['localhost:8080']
+
+#Nginx-exporter
+    - job_name:         'nginx-exporter'
+      scrape_interval:  5s
+      metrics_path:     '/prometheus'
+      static_configs:
+        - targets:      ['localhost:9113']

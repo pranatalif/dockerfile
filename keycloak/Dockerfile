@@ -32,6 +32,7 @@ COPY docker-entrypoint.sh /opt/jboss/keycloak
 
 RUN cd $JBOSS_HOME/bin && ./add-user-keycloak.sh -r master -u ${KEYCLOAK_ADMIN_USER} -p ${KEYCLOAK_ADMIN_PASS}
 #RUN /opt/jboss/keycloak/bin/add-user.sh -u ${KEYCLOAK_ADMIN_USER} -p ${KEYCLOAK_ADMIN_PASS}
+RUN cd $JBOSS_HOME/bin && ./add-user-keycloak.sh -r demo -u aalif -p aalif
 
 
 #USER 1000

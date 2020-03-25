@@ -4,7 +4,7 @@ keycloak.init({
     onLoad: 'login-required',
     promiseType: 'native'
 }).then(function (authenticated) {
-    alert(authenticated ? 'authenticated' : 'not authenticated');
+    //alert(authenticated ? 'authenticated' : 'not authenticated');
 
     if (authenticated) {
         keycloak.updateToken(30).then(function () {
